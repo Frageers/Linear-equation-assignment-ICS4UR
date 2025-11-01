@@ -60,6 +60,10 @@ class fraction {
         this.den = den;
     }
 
+    /**
+     * @return formatted string representation of the given fraction
+     * 
+     */
     public String toString(){
         int wholePart = num / den;
         int remainder = Math.abs(num % den);
@@ -74,5 +78,54 @@ class fraction {
         return String.format("%d %d/%d", wholePart, remainder, Math.abs(den));
     }
 
+    /**
+     * 
+     * @param another the fraction to be added to the first fraction
+     *
+     */
+    public fraction add(fraction another){
+        int newNum = this.num * another.den + another.num * this.den;
+        int newDen = this.den * another.den;
+        return new fraction(newNum, newDen);
+    }
 
+    /**
+     * 
+     * @param another the fraction to be subtracted from the first fraction
+     *
+     */
+    public fraction subtract(fraction another){
+
+        int newNum = this.num * another.den - another.num * this.den;
+        int newDen = this.den * another.den;
+        return new fraction(newNum, newDen);
+    }
+
+    /**
+     * 
+     * @param another the fraction to be multiplied with the first fraction
+     */
+    public fraction multiply(fraction another){
+        int newNum = this.num * another.num;
+        int newDen = this.den * another.den;
+        return new fraction(newNum, newDen);
+    }
+
+    
+    /**
+     * 
+     * @return the reciprocal of the given fraction
+     */
+    public fraction reciprocal(){
+        return new fraction(this.den, this.num);
+    }
+
+    
+    /**
+     * 
+     * @param another the fraction to be divided with fraction 1
+     */
+    public fraction divide(fraction another){
+        return this.multiply(another.reciprocal());
+    }
 }
