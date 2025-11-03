@@ -5,6 +5,11 @@ class fraction {
     
     //constructors
     fraction(int num, int den){
+
+        if(den == 0){
+            throw new ArithmeticException("Denominator can not be 0");
+        }
+
         int g = gcd(num, den);
         this.num = num / g;
         this.den = den / g;
@@ -16,6 +21,11 @@ class fraction {
     }
 
     fraction(int num, int den, int whole){
+
+        if(den == 0){
+            throw new ArithmeticException("Denominator can not be 0");
+        }
+
         int g = gcd(num, den);
         num /= g;
         den /= g;

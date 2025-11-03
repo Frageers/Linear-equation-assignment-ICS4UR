@@ -2,6 +2,7 @@
 
 
 public class test {
+    //fraction class method testing
     static void testToStringFrac(){
         fraction fraction1 = new fraction(11, 12);
         fraction fraction2 = new fraction(1, 4, 2);
@@ -94,9 +95,7 @@ public class test {
         System.out.println(fraction7.divide(fraction8)); //expected -1/2
     }
 
-
-
-    public static void main(String[] args) {
+    static void testAllFractionMethods(){
         System.out.println("To String fraction:");
         testToStringFrac();
         System.out.println("Add fraction:");
@@ -107,6 +106,30 @@ public class test {
         testMultiplyFrac();
         System.out.println("Divide fraction");
         testDivideFrac();
+    }
+
+    //term class method testing
+    static void testTermClass(){
+        term term1 = new term(new fraction(7, 1), false);
+        System.out.println(term1);
+
+        term term2 = new term(new fraction(5, 1), true);
+        System.out.println(term2);
+
+        term term3 = new term(new fraction(3, 5), true);
+        System.out.println(term3);
+
+        term term4 = new term(new fraction(-1, 1), true);
+        System.out.println(term4);
+
+        term term5 = new term(new fraction(-4, 12), false);
+        System.out.println(term5);
+
+    }
+    
+    public static void main(String[] args) {
+        // testAllFractionMethods();
+        testTermClass();
 
 
     }
