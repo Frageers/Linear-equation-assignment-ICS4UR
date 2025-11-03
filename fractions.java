@@ -1,10 +1,10 @@
-class fraction {
+class Fraction {
     private int num;
     private int den;
     private int whole = 0;
     
     //constructors
-    fraction(int num, int den){
+    Fraction(int num, int den){
 
         if(den == 0){
             throw new ArithmeticException("Denominator can not be 0");
@@ -20,7 +20,7 @@ class fraction {
         }
     }
 
-    fraction(int num, int den, int whole){
+    Fraction(int num, int den, int whole){
 
         if(den == 0){
             throw new ArithmeticException("Denominator can not be 0");
@@ -41,7 +41,11 @@ class fraction {
             this.den *= -1;
         }
     }
-
+   
+    /**retuns the gcd of 2 terms
+     * @param a the first / lower number
+     * @param b the second / higher number
+     */
     static int gcd(int a, int b){
         a = Math.abs(a);
         b = Math.abs(b);
@@ -51,12 +55,15 @@ class fraction {
     }
 
     //getters
+    /**returns the numerator */
     int getNum(){
         return num;
     }
+    /**returns the denominator */
     int getDen(){
         return den;
     }
+    /**retuns the whole number */
     int getWhole(){
          return whole;
     }
@@ -70,8 +77,8 @@ class fraction {
         this.den = den;
     }
 
-    /**
-     * @return formatted string representation of the given fraction
+    /**gives the Fraction formatted in a proper way
+     * @return formatted string representation of the given Fraction
      * 
      */
     public String toString(){
@@ -88,54 +95,54 @@ class fraction {
         return String.format("%d %d/%d", wholePart, remainder, Math.abs(den));
     }
 
-    /**
+    /**adds 2 Fractions
      * 
-     * @param another the fraction to be added to the first fraction
+     * @param another the Fraction to be added to the first Fraction
      *
      */
-    public fraction add(fraction another){
+    public Fraction add(Fraction another){
         int newNum = this.num * another.den + another.num * this.den;
         int newDen = this.den * another.den;
-        return new fraction(newNum, newDen);
+        return new Fraction(newNum, newDen);
     }
 
-    /**
+    /**subtracts 2 Fractions
      * 
-     * @param another the fraction to be subtracted from the first fraction
+     * @param another the Fraction to be subtracted from the first Fraction
      *
      */
-    public fraction subtract(fraction another){
+    public Fraction subtract(Fraction another){
 
         int newNum = this.num * another.den - another.num * this.den;
         int newDen = this.den * another.den;
-        return new fraction(newNum, newDen);
+        return new Fraction(newNum, newDen);
     }
 
-    /**
+    /**multiplies 2 Fractions
      * 
-     * @param another the fraction to be multiplied with the first fraction
+     * @param another the Fraction to be multiplied with the first Fraction
      */
-    public fraction multiply(fraction another){
+    public Fraction multiply(Fraction another){
         int newNum = this.num * another.num;
         int newDen = this.den * another.den;
-        return new fraction(newNum, newDen);
+        return new Fraction(newNum, newDen);
     }
 
     
-    /**
+    /**returns the reciprocal of a Fraction
      * 
-     * @return the reciprocal of the given fraction
+     * @return the reciprocal of the given Fraction
      */
-    public fraction reciprocal(){
-        return new fraction(this.den, this.num);
+    public Fraction reciprocal(){
+        return new Fraction(this.den, this.num);
     }
 
     
-    /**
+    /** divides 2 Fractions
      * 
-     * @param another the fraction to be divided with fraction 1
+     * @param another the Fraction to be divided with Fraction 1
      */
-    public fraction divide(fraction another){
+    public Fraction divide(Fraction another){
         return this.multiply(another.reciprocal());
     }
 }

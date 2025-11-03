@@ -4,10 +4,10 @@
 public class test {
     //fraction class method testing
     static void testToStringFrac(){
-        fraction fraction1 = new fraction(11, 12);
-        fraction fraction2 = new fraction(1, 4, 2);
-        fraction fraction3 = new fraction(6, 3);
-        fraction fraction4 = new fraction(0, 5);
+        Fraction fraction1 = new Fraction(11, 12);
+        Fraction fraction2 = new Fraction(1, 4, 2);
+        Fraction fraction3 = new Fraction(6, 3);
+        Fraction fraction4 = new Fraction(0, 5);
 
         System.out.println(fraction1.toString()); //expected 11/12
         System.out.println(fraction2.toString()); //expected 2 1/4
@@ -16,17 +16,17 @@ public class test {
     }
 
     static void testAddFrac(){
-        fraction fraction1 = new fraction(1, 2);
-        fraction fraction2 = new fraction(1, 3);
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(1, 3);
         
-        fraction fraction3 = new fraction(2, 7);
-        fraction fraction4 = new fraction(3, 7);
+        Fraction fraction3 = new Fraction(2, 7);
+        Fraction fraction4 = new Fraction(3, 7);
 
-        fraction fraction5 = new fraction(1, 4);
-        fraction fraction6 = new fraction(3, 4);
+        Fraction fraction5 = new Fraction(1, 4);
+        Fraction fraction6 = new Fraction(3, 4);
 
-        fraction fraction7 = new fraction(5, 6);
-        fraction fraction8 = new fraction(3, 4);
+        Fraction fraction7 = new Fraction(5, 6);
+        Fraction fraction8 = new Fraction(3, 4);
 
         
 
@@ -37,17 +37,17 @@ public class test {
     }
 
     static void testSubtractFrac(){
-        fraction fraction1 = new fraction(1, 2);
-        fraction fraction2 = new fraction(1, 3);
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(1, 3);
 
-        fraction fraction3 = new fraction(1, 4);
-        fraction fraction4 = new fraction(3, 4);
+        Fraction fraction3 = new Fraction(1, 4);
+        Fraction fraction4 = new Fraction(3, 4);
 
-        fraction fraction5 = new fraction(1, 2);
-        fraction fraction6 = new fraction(-1, 4);
+        Fraction fraction5 = new Fraction(1, 2);
+        Fraction fraction6 = new Fraction(-1, 4);
 
-        fraction fraction7 = new fraction(1, 2);
-        fraction fraction8 = new fraction(1, -4);
+        Fraction fraction7 = new Fraction(1, 2);
+        Fraction fraction8 = new Fraction(1, -4);
 
 
 
@@ -58,17 +58,17 @@ public class test {
     }
 
     static void testMultiplyFrac() {
-        fraction fraction1 = new fraction(1, 2);
-        fraction fraction2 = new fraction(2, 3);
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(2, 3);
 
-        fraction fraction3 = new fraction(-1, 4);
-        fraction fraction4 = new fraction(3, 5);
+        Fraction fraction3 = new Fraction(-1, 4);
+        Fraction fraction4 = new Fraction(3, 5);
 
-        fraction fraction5 = new fraction(0, 7);
-        fraction fraction6 = new fraction(5, 9);
+        Fraction fraction5 = new Fraction(0, 7);
+        Fraction fraction6 = new Fraction(5, 9);
 
-        fraction fraction7 = new fraction(3, 4);
-        fraction fraction8 = new fraction(4, 3);
+        Fraction fraction7 = new Fraction(3, 4);
+        Fraction fraction8 = new Fraction(4, 3);
 
         System.out.println(fraction1.multiply(fraction2)); //expected 1/3
         System.out.println(fraction3.multiply(fraction4)); //expected -3/20
@@ -77,17 +77,17 @@ public class test {
     }
 
     static void testDivideFrac() {
-        fraction fraction1 = new fraction(1, 2);
-        fraction fraction2 = new fraction(2, 3);
+        Fraction fraction1 = new Fraction(1, 2);
+        Fraction fraction2 = new Fraction(2, 3);
 
-        fraction fraction3 = new fraction(-3, 4);
-        fraction fraction4 = new fraction(1, 2);
+        Fraction fraction3 = new Fraction(-3, 4);
+        Fraction fraction4 = new Fraction(1, 2);
 
-        fraction fraction5 = new fraction(5, 6);
-        fraction fraction6 = new fraction(5, 6);
+        Fraction fraction5 = new Fraction(5, 6);
+        Fraction fraction6 = new Fraction(5, 6);
 
-        fraction fraction7 = new fraction(7, 8);
-        fraction fraction8 = new fraction(-7, 4);
+        Fraction fraction7 = new Fraction(7, 8);
+        Fraction fraction8 = new Fraction(-7, 4);
 
         System.out.println(fraction1.divide(fraction2)); //expected 3/4
         System.out.println(fraction3.divide(fraction4)); //expected -1 1/2
@@ -110,26 +110,42 @@ public class test {
 
     //term class method testing
     static void testTermClass(){
-        term term1 = new term(new fraction(7, 1), false);
+        Term term1 = new Term(new Fraction(7, 1), false);
         System.out.println(term1);
 
-        term term2 = new term(new fraction(5, 1), true);
+        Term term2 = new Term(new Fraction(5, 1), true);
         System.out.println(term2);
 
-        term term3 = new term(new fraction(3, 5), true);
+        Term term3 = new Term(new Fraction(3, 5), true);
         System.out.println(term3);
 
-        term term4 = new term(new fraction(-1, 1), true);
+        Term term4 = new Term(new Fraction(-1, 1), true);
         System.out.println(term4);
 
-        term term5 = new term(new fraction(-4, 12), false);
+        Term term5 = new Term(new Fraction(-4, 12), false);
         System.out.println(term5);
 
     }
     
+    static void testAddTerms(){
+        Term term1 = new Term(new Fraction(3, 4), true);
+        
+        Term term2 = new Term(new Fraction(8, 11), true);
+
+        System.out.println(term1.add(term2));
+
+        Term term3 = new Term(new Fraction(3,4), true);
+        
+        Term term4 = new Term(new Fraction(-1, 4), false);  
+
+    }
+    
+    
     public static void main(String[] args) {
         // testAllFractionMethods();
-        testTermClass();
+        // testTermClass();
+        testAddTerms();
+
 
 
     }
