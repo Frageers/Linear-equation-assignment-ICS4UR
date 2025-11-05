@@ -23,7 +23,6 @@ class Equation {
 
     public static void main(String[] args) {
         Equation equation = new Equation("2x + 34/5x - 15 = -3x + 21/2x");
-        Equation equation1 = new Equation("5p = 15");
-        System.out.println(equation1.solve());
+        System.out.println("x = " + equation.solve());
     }
 }

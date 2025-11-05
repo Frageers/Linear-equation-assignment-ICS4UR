@@ -61,8 +61,4 @@ class Expression {
         sc.close();
         return e;
     }
-
-    public static void main(String[] args){
-        System.out.println(simplify("-2x - 5 - x + 7"));
-    }
 }
