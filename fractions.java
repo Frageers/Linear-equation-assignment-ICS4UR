@@ -103,7 +103,6 @@ class Fraction {
     public static Fraction valueOf(String term){
         term = term.trim();
         int space = term.indexOf(' ');
-        Fraction convertedFraction;
         if(space != -1){
             int whole = Integer.valueOf(term.substring(0, space));
             String fraction = term.substring(space + 1);
