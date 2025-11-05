@@ -160,8 +160,51 @@ public class test {
         System.out.println(term3.add(term4));
     }
     
+
+    static void testSubtractTerms(){
+        Term term1 = new Term(new Fraction(7, 14), false);
+        
+        Term term2 = new Term(new Fraction(14, 16), false);
+
+        System.out.println(term1.subtract(term2));
+
+        Term term3 = new Term(new Fraction(3,4), true);
+        
+        Term term4 = new Term(new Fraction(-1, 4), false);  
+        System.out.println(term3.subtract(term4));
+    }
+
+    static void testMultiplyTerms(){
+        Term term1 = new Term(new Fraction(3, 4), true);
+        
+        Term term2 = new Term(new Fraction(8, 11), true);
+
+        System.out.println(term1.multiply(term2));
+
+        Term term3 = new Term(new Fraction(3,4), true);
+        
+        Term term4 = new Term(new Fraction(-1, 4), false);  
+        
+        System.out.println(term3.multiply(term4));
+
+    }
+
+    static void testDivideTerms(){
+        Term term1 = new Term(new Fraction(3, 4), true);
+        
+        Term term2 = new Term(new Fraction(8, 11), true);
+
+        System.out.println(term1.divide(term2));
+
+        Term term3 = new Term(new Fraction(3,4), true);
+        
+        Term term4 = new Term(new Fraction(-1, 4), false);  
+        
+        System.out.println(term3.divide(term4));
+
+    }
     
-    public static void main(String[] args) {
+    public static void testAllTerms(String[] args) {
         // testAllFractionMethods();
         // testTermClass();
         // testAddTerms();
@@ -171,4 +214,7 @@ public class test {
 
 
     }
+
+
+    
 }
