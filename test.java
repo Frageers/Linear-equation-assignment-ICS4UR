@@ -95,6 +95,16 @@ public class test {
         System.out.println(fraction7.divide(fraction8)); //expected -1/2
     }
 
+    static void testValueOfFrac(){
+        String fraction1 = "5/4";
+        String fraction2 = "2 1/4";
+        String fraction3 = "5";
+        
+        System.out.println(Fraction.valueOf(fraction1));
+        System.out.println(Fraction.valueOf(fraction2));
+        System.out.println(Fraction.valueOf(fraction3));
+    }
+    
     static void testAllFractionMethods(){
         System.out.println("To String fraction:");
         testToStringFrac();
@@ -127,6 +137,15 @@ public class test {
 
     }
     
+    static void testValueOfTerm(){
+        String term1 = "3/7x";
+        String term2 = "-5/4x";
+
+        System.out.println(Term.valueOf(term1));
+        System.out.println(Term.valueOf(term2));
+        System.out.println(Term.valueOf(term1).add(Term.valueOf(term2)));
+    }
+
     static void testAddTerms(){
         Term term1 = new Term(new Fraction(3, 4), true);
         
@@ -136,10 +155,9 @@ public class test {
 
         Term term3 = new Term(new Fraction(3,4), true);
         
-        Term term4 = new Term(new Fraction(-1, 4), false);  
-        
-        System.out.println(term3.add(term4));
+        Term term4 = new Term(new Fraction(-1, 4), false);
 
+        System.out.println(term3.add(term4));
     }
     
 
@@ -189,9 +207,10 @@ public class test {
     public static void testAllTerms(String[] args) {
         // testAllFractionMethods();
         // testTermClass();
-        //testAddTerms();
-        //testSubtractTerms();
-        testDivideTerms();
+        // testAddTerms();
+        // testValueOfFrac();
+        testValueOfTerm();
+
 
 
     }
