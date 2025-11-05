@@ -69,12 +69,17 @@ class Fraction {
     }
 
     //setters
+    /**Sets the numerator */
     void setNum(int num){
         this.num = num;
     }
-
+    /**Sets denominator */
     void setDen(int den){
         this.den = den;
+    }
+    /**Sets whole number */
+    void setWhole(int whole){
+        this.whole = whole;
     }
 
     /**gives the Fraction formatted in a proper way
@@ -93,6 +98,28 @@ class Fraction {
             return String.format("%d/%d", num, den);
         }
         return String.format("%d %d/%d", wholePart, remainder, Math.abs(den));
+    }
+    /**converts from String to Fraction */
+    public static Fraction valueOf(String term){
+        term = term.trim();
+        int space = term.indexOf(' ');
+        Fraction convertedFraction;
+        if(space != -1){
+            int whole = Integer.valueOf(term.substring(0, space));
+            String fraction = term.substring(space + 1);
+            int slash = fraction.indexOf('/');
+            int num = Integer.valueOf(fraction.substring(0, slash));
+            int den = Integer.valueOf(fraction.substring(slash+1));
+
+            return new Fraction(num, den, whole);
+        }
+        int slash = term.indexOf('/');
+        if(slash != -1){
+            int num = Integer.valueOf(term.substring(0, slash));
+            int den = Integer.valueOf(term.substring(slash + 1));
+            return new Fraction(num, den);
+        }
+        return new Fraction(Integer.valueOf(term), 1);
     }
 
     /**adds 2 Fractions
