@@ -46,44 +46,59 @@ class Fraction {
     /**retuns the gcd of 2 terms
      * @param a the first / lower number
      * @param b the second / higher number
+     * @return the gcd of the 2 numbers
      */
     static int gcd(int a, int b){
         a = Math.abs(a);
         b = Math.abs(b);
 
-        if (b == 0) return a;
+        if (b == 0){
+            return a;
+        }
         return gcd(b, a % b);
     }
 
  
     //tested   
-    /**returns the numerator */
+    /**returns the numerator 
+     * @return the numerator
+    */
     int getNum(){
         return num;
     }
     
     //tested
-    /**returns the denominator */
+    /**returns the denominator 
+     * @return the denominator
+    */
     int getDen(){
         return den;
     }
 
     //tested
-    /**retuns the whole number */
+    /**retuns the whole number 
+     * @return the whole number
+    */
     int getWhole(){
          return whole;
     }
 
     //setters
-    /**Sets the numerator */
+    /**Sets the numerator 
+     * @param num the numerator to set to
+    */
     void setNum(int num){
         this.num = num;
     }
-    /**Sets denominator */
+    /**Sets denominator 
+     * @param den the denominator to set to
+    */
     void setDen(int den){
         this.den = den;
     }
-    /**Sets whole number */
+    /**Sets whole number 
+     * @param whole the whole number to set to
+    */
     void setWhole(int whole){
         this.whole = whole;
     }
@@ -108,7 +123,11 @@ class Fraction {
     }
     
     //tested
-    /**converts from String to Fraction */
+    /**converts from String to Fraction 
+     * @param term the string representation of the fraction
+     * @return the string converted to a fraction
+     *
+    */
     public static Fraction valueOf(String term){
         term = term.trim();
         int space = term.indexOf(' ');
@@ -134,7 +153,7 @@ class Fraction {
     /**adds 2 Fractions
      * 
      * @param another the Fraction to be added to the first Fraction
-     *
+     *@return the sum of the 2 fractions
      */
     public Fraction add(Fraction another){
         int newNum = this.num * another.den + another.num * this.den;
@@ -144,9 +163,8 @@ class Fraction {
 
     //tested
     /**subtracts 2 Fractions
-     * 
      * @param another the Fraction to be subtracted from the first Fraction
-     *
+     * @return the difference of the 2 fractions
      */
     public Fraction subtract(Fraction another){
 
@@ -157,8 +175,8 @@ class Fraction {
 
     //tested
     /**multiplies 2 Fractions
-     * 
      * @param another the Fraction to be multiplied with the first Fraction
+     * @return the product of the 2 fractions
      */
     public Fraction multiply(Fraction another){
         int newNum = this.num * another.num;
@@ -168,7 +186,6 @@ class Fraction {
 
     //tested
     /**returns the reciprocal of a Fraction
-     * 
      * @return the reciprocal of the given Fraction
      */
     public Fraction reciprocal(){
@@ -176,9 +193,9 @@ class Fraction {
     }
 
     //tested
-    /** divides 2 Fractions
-     * 
+    /** divides 2 Fractions 
      * @param another the Fraction to be divided with Fraction 1
+     * @return the quotient of the 2 fractions
      */
     public Fraction divide(Fraction another){
         return this.multiply(another.reciprocal());

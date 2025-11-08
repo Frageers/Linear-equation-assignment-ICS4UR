@@ -21,7 +21,9 @@ class Term {
     }
 
     //tested
-    /** returns if the term has a variable*/
+    /** returns if the term has a variable
+     * @return if the term has a variable
+    */
     public boolean hasVariable(){
         return hasVariable;
     }
@@ -29,6 +31,7 @@ class Term {
     //tested
     /** adds two terms
      * @param t the term you want to add to the first term
+     * @return the sum of the 2 terms
      */
     public Term add(Term t) throws IllegalArgumentException{
         if((this.hasVariable != t.hasVariable)){
@@ -39,7 +42,10 @@ class Term {
     }
   
     //tested
-    /**Subtracts two terms */
+    /**Subtracts two terms 
+     * @param t the term to be subtracted from the first term
+     * @return the difference of the 2 terms
+    */
     public Term subtract(Term t) throws IllegalArgumentException{
         if(this.hasVariable != t.hasVariable){
             throw new IllegalArgumentException();
@@ -57,7 +63,10 @@ class Term {
     }
     
     //tested
-    /**Converts from string to term */
+    /**Converts from string to term 
+     * @param token a string representation of the term
+     * @return the converted term
+    */
     public static Term valueOf(String token){
         boolean hasVar = false;
         char charAtEnd = token.charAt(token.length()-1);

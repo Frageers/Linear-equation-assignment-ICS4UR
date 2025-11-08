@@ -11,13 +11,17 @@ class Expression {
     Expression(){}
 
     //tested
-   /**Gets the variable term */ 
+   /**Gets the variable term
+    *@return the variable term from the expression 
+    */ 
     public Term getVariableTerm(){
         return variableTerm;
     }
 
     //tested
-    /**Gets the constant term */
+    /**Gets the constant term 
+     * @return the constant term from the expression
+    */
     public Term getConstantTerm(){
         return constantTerm;
     }
@@ -40,7 +44,9 @@ class Expression {
 
     //tested
     /**Simplifies the expression
+     * 
      * @param expression the expression to be simplified
+     * @return the simplified expression
      */
     public static Expression simplify(String expression){
         Expression e = new Expression();

@@ -16,7 +16,9 @@ class Equation {
         this.variable = variable;
     }
     /**Finds the variable used in an equation and makes sure there is only 1
+     * 
      * @param equation the equation to search through for the variable
+     * @return the name of the variable
      */
     private static char findVariable(String equation) throws IllegalArgumentException{
         char variable = '\0';
@@ -39,7 +41,9 @@ class Equation {
     }
 
     //tested
-    /**Solves the equation and returns it in a properly formatted way */
+    /**Solves the equation and returns it in a properly formatted way
+     * @return the answer formatted properly
+    */
     public String solve(){
         Term xPart = leftSide.getVariableTerm().subtract(rightSide.getVariableTerm());
         Term constantPart = leftSide.getConstantTerm().subtract(rightSide.getConstantTerm());
