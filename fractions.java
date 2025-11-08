@@ -42,6 +42,7 @@ class Fraction {
         }
     }
    
+    //tested
     /**retuns the gcd of 2 terms
      * @param a the first / lower number
      * @param b the second / higher number
@@ -54,15 +55,20 @@ class Fraction {
         return gcd(b, a % b);
     }
 
-    //getters
+ 
+    //tested   
     /**returns the numerator */
     int getNum(){
         return num;
     }
+    
+    //tested
     /**returns the denominator */
     int getDen(){
         return den;
     }
+
+    //tested
     /**retuns the whole number */
     int getWhole(){
          return whole;
@@ -82,6 +88,7 @@ class Fraction {
         this.whole = whole;
     }
 
+    //tested
     /**gives the Fraction formatted in a proper way
      * @return formatted string representation of the given Fraction
      * 
@@ -99,6 +106,8 @@ class Fraction {
         }
         return String.format("%d %d/%d", wholePart, remainder, Math.abs(den));
     }
+    
+    //tested
     /**converts from String to Fraction */
     public static Fraction valueOf(String term){
         term = term.trim();
@@ -121,6 +130,7 @@ class Fraction {
         return new Fraction(Integer.valueOf(term), 1);
     }
 
+    //tested
     /**adds 2 Fractions
      * 
      * @param another the Fraction to be added to the first Fraction
@@ -132,6 +142,7 @@ class Fraction {
         return new Fraction(newNum, newDen);
     }
 
+    //tested
     /**subtracts 2 Fractions
      * 
      * @param another the Fraction to be subtracted from the first Fraction
@@ -144,6 +155,7 @@ class Fraction {
         return new Fraction(newNum, newDen);
     }
 
+    //tested
     /**multiplies 2 Fractions
      * 
      * @param another the Fraction to be multiplied with the first Fraction
@@ -154,7 +166,7 @@ class Fraction {
         return new Fraction(newNum, newDen);
     }
 
-    
+    //tested
     /**returns the reciprocal of a Fraction
      * 
      * @return the reciprocal of the given Fraction
@@ -163,7 +175,7 @@ class Fraction {
         return new Fraction(this.den, this.num);
     }
 
-    
+    //tested
     /** divides 2 Fractions
      * 
      * @param another the Fraction to be divided with Fraction 1

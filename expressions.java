@@ -1,17 +1,22 @@
 import java.util.Scanner;
 
 class Expression {
-    Term variableTerm;
-    Term constantTerm;
+    Term variableTerm = new Term(new Fraction(0, 1), true);
+    Term constantTerm = new Term(new Fraction(0, 1), false);
 
-    Expression(){
-        this.variableTerm = new Term(new Fraction(0, 1), true);
-        this.constantTerm = new Term(new Fraction(0, 1), false);
+    Expression(Term variableTerm, Term constantTerm){
+        this.variableTerm = variableTerm;
+        this.constantTerm = constantTerm;
     }
+    Expression(){}
+
+    //tested
    /**Gets the variable term */ 
     public Term getVariableTerm(){
         return variableTerm;
     }
+
+    //tested
     /**Gets the constant term */
     public Term getConstantTerm(){
         return constantTerm;
@@ -33,6 +38,7 @@ class Expression {
         return result;
     }
 
+    //tested
     /**Simplifies the expression
      * @param expression the expression to be simplified
      */

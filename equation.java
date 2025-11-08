@@ -18,13 +18,13 @@ class Equation {
     /**Finds the variable used in an equation and makes sure there is only 1
      * @param equation the equation to search through for the variable
      */
-    static char findVariable(String equation){
+    private static char findVariable(String equation) throws IllegalArgumentException{
         char variable = '\0';
         for(int i = 0; i < equation.length(); i++){
             char c = equation.charAt(i);
             if((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')){
                 if(variable == '\0'){
-                    variable = c; // first variable found — remember it
+                    variable = c;
                 }
                 else if(variable != c){
                     throw new IllegalArgumentException("More than one variable found in equation.");
@@ -38,6 +38,7 @@ class Equation {
         return variable;
     }
 
+    //tested
     /**Solves the equation and returns it in a properly formatted way */
     public String solve(){
         Term xPart = leftSide.getVariableTerm().subtract(rightSide.getVariableTerm());

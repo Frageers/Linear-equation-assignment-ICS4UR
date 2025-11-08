@@ -11,39 +11,43 @@ class Term {
         this.coefficient = coefficient;
         this.hasVariable = hasVariable;
     }
-    /**returns the coefficient of a term */
+    
+    //tested
+    /**returns the coefficient of a term 
+     * @return coefficient of the term
+    */
     public Fraction getCoefficient(){
         return coefficient;
     }
 
+    //tested
     /** returns if the term has a variable*/
     public boolean hasVariable(){
         return hasVariable;
     }
 
-
+    //tested
     /** adds two terms
      * @param t the term you want to add to the first term
      */
-    public Term add(Term t){
+    public Term add(Term t) throws IllegalArgumentException{
+        if((this.hasVariable != t.hasVariable)){
+            throw new IllegalArgumentException("Can't be added because they aren't like terms");
+        }
         Fraction newCoefficient = this.coefficient.add(t.coefficient);
         return new Term(newCoefficient, this.hasVariable());
     }
+  
+    //tested
     /**Subtracts two terms */
-    public Term subtract(Term t){
+    public Term subtract(Term t) throws IllegalArgumentException{
+        if(this.hasVariable != t.hasVariable){
+            throw new IllegalArgumentException();
+        }
         Fraction newCoefficient = this.coefficient.subtract(t.coefficient);
         return new Term(newCoefficient, this.hasVariable());
     }
 
-    // public Term multiply(Term t){
-    //     Fraction newCoefficient = this.coefficient.multiply(t.coefficient);
-    //     return new Term(newCoefficient, this.hasVariable());
-    // }
-
-    // public Term divide(Term t){
-    //     Fraction newCoefficient = this.coefficient.divide(t.coefficient);
-    //     return new Term(newCoefficient, this.hasVariable);
-    // }
     /**converts from term to String */
     public String toString(){
         if(hasVariable){
@@ -51,6 +55,8 @@ class Term {
         }
         return coefficient.toString();
     }
+    
+    //tested
     /**Converts from string to term */
     public static Term valueOf(String token){
         boolean hasVar = false;
