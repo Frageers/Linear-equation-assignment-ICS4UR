@@ -54,11 +54,20 @@ class Term {
         return new Term(newCoefficient, this.hasVariable());
     }
 
+    /**Multiplies two terms
+     * @param t the term you want multiplied with the first term
+     * @return the product of the 2 terms
+     */
     public Term multiply(Term t){
         Fraction newCoefficient = this.coefficient.multiply(t.coefficient);
         return new Term(newCoefficient, this.hasVariable());
     }
 
+    
+    /**Divides two terms
+     * @param t the term you want to divide the first term by
+     * @return the quotient of the 2 terms
+     */
     public Term divide(Term t){
         Fraction newCoefficient = this.coefficient.divide(t.coefficient);
         return new Term(newCoefficient, this.hasVariable());
@@ -77,7 +86,6 @@ class Term {
      * @return the converted term
     */
     public static Term valueOf(String token){
-        System.out.println("DEBUG: token = \"" + token + "\"");  // <--- Add this
         boolean hasVar = false;
         String coefficientString = token;
 

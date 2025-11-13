@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 class Expression {
-    Term variableTerm = new Term(new Fraction(0, 1), true);
-    Term constantTerm = new Term(new Fraction(0, 1), false);
+    private Term variableTerm = new Term(new Fraction(0, 1), true);
+    private Term constantTerm = new Term(new Fraction(0, 1), false);
 
     Expression(Term variableTerm, Term constantTerm){
         this.variableTerm = variableTerm;
@@ -50,7 +50,11 @@ class Expression {
 
         return result.toString();
     }
-
+    
+    /**Handles distribution for cases like 2(x+3)
+     * @param expression the expression that needs to be expanded
+     * @return the expanded form of the equation
+     */
     public static Expression handleBracket(String expression) throws IllegalArgumentException{
         expression = expression.replace(" ", "");
 
@@ -88,6 +92,10 @@ class Expression {
         return new Expression((expanded.getVariableTerm().add(rest.getVariableTerm())), (expanded.getConstantTerm().add(rest.getConstantTerm())));
     }
 
+    /**Handles whole division for cases like (x+3)/5
+     * @param expression the expression with the whole divide
+     * @return the simplified version of the given expression
+     */
     public static Expression handleWholeDivide(String expression) throws IllegalArgumentException{
         expression = expression.replace(" ", "");
         int locationWholeDivide = expression.indexOf(")/");
@@ -134,10 +142,5 @@ class Expression {
         }
         sc.close();
         return e;
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println(handleWholeDivide("2(x+3)/2"));
     }
 }

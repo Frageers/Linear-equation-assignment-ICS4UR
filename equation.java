@@ -15,9 +15,17 @@ class Equation {
         rightSide = Expression.handleWholeDivide(rightString);
         this.variable = variable;
     }
-
+    /**gives the left side of the equation
+     * @return everything before the =
+     */
     public Expression getLeftSide(){
         return leftSide;
+    }
+    /**gives the right side of the equation 
+     * @return everything after the =
+    */
+    public Expression getRightSide(){
+        return rightSide;
     }
     /**Finds the variable used in an equation and makes sure there is only 1
      * 
@@ -55,15 +63,5 @@ class Equation {
         Fraction variableValue = constantPart.getCoefficient().multiply(new Fraction(-1, 1)).divide(xPart.getCoefficient());
         Term answer = new Term(variableValue, false);
         return variable + " = " + answer;
-    }
-
-
-    public static void main(String[] args) {
-        Equation equation1 = new Equation("2x + 34/5x - 15 = -3x + 21/2x");
-        Equation equation2 = new Equation("-7/2p + 6/5 = 9/4");
-
-
-        System.out.println(equation1.solve());
-        System.out.println(equation2.solve());
     }
 }

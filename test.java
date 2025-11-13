@@ -326,8 +326,8 @@ public class test {
         // testAllFractionMethods();
         // testAllTermMethods();
         // testAllExpressionMethods();
-        testSolve();
-        // testHandleWholeDivide();
+        // testSolve();
+        testHandleWholeDivide();
     }
 
 
