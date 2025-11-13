@@ -27,19 +27,81 @@ class Expression {
     }
     /**Converts from expression to string */
     public String toString(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         if(variableTerm.getCoefficient().getNum() != 0){
-            result += variableTerm.toString();
+            result.append(variableTerm.toString());
         }
+        int constNum = constantTerm.getCoefficient().getNum();
+        int constDen = constantTerm.getCoefficient().getDen();
 
-        if (constantTerm.getCoefficient().getNum() != 0) {
-            if (!result.equals("")) { // if there’s already a variable term
-                result += " + "; // simple separator
+        if(constNum != 0){
+            if(result.length() > 0){
+                if(constNum > 0){
+                    result.append(" + ").append(constantTerm.toString());
+                }
+                else{
+                    result.append(" - ").append(new Fraction(-constNum, constDen));
+                }
             }
-            result += constantTerm.toString();
+            else{
+                result.append(constantTerm.toString());
+            }
         }
 
-        return result;
+        return result.toString();
+    }
+
+    public static Expression handleBracket(String expression) throws IllegalArgumentException{
+        expression = expression.replace(" ", "");
+
+        int open = expression.indexOf("(");
+        int close = expression.indexOf(")");
+        if(open == -1) return simplify(expression);
+        if(close == -1) throw new IllegalArgumentException("Invalid equation, bracket never closed");
+
+        String stringCoefficientBracket = expression.substring(0, open);
+        String stringExpressionInBracket = expression.substring(open+1,close);
+        String stringRestExpression = expression.substring(close+1);
+
+        if(stringCoefficientBracket.equals("") || stringCoefficientBracket.equals("+")){
+            stringCoefficientBracket = "1";
+        }
+        else if(stringCoefficientBracket.equals("-")){
+            stringCoefficientBracket = "-1";
+        }
+
+        Term multiplier = Term.valueOf(stringCoefficientBracket);
+
+        Term newVarTerm = simplify(stringExpressionInBracket).getVariableTerm().multiply(multiplier);
+        Term newConstantTerm = simplify(stringExpressionInBracket).getConstantTerm().multiply(multiplier);
+
+
+        Expression expanded = new Expression(newVarTerm, newConstantTerm);
+            Expression rest;
+            if (stringRestExpression.equals("") || stringRestExpression.equals("+") || stringRestExpression.equals("-")) {
+                rest = new Expression(); // 0
+            } 
+            else {
+                rest = simplify(stringRestExpression);
+            }
+
+        return new Expression((expanded.getVariableTerm().add(rest.getVariableTerm())), (expanded.getConstantTerm().add(rest.getConstantTerm())));
+    }
+
+    public static Expression handleWholeDivide(String expression) throws IllegalArgumentException{
+        expression = expression.replace(" ", "");
+        int locationWholeDivide = expression.indexOf(")/");
+        if(locationWholeDivide == -1){
+            return handleBracket(expression);
+        }
+        String insideBracket = expression.substring(0, locationWholeDivide+1);
+        String divisorStr = expression.substring(locationWholeDivide+2);
+        Term divisor = simplify(divisorStr).getConstantTerm();
+        Expression bracketSimplified = handleBracket(insideBracket);
+        Term newVarTerm = bracketSimplified.getVariableTerm().divide(divisor);
+        Term newConstantTerm = bracketSimplified.getConstantTerm().divide(divisor);
+        return new Expression(newVarTerm, newConstantTerm);
+
     }
 
     //tested
@@ -72,5 +134,10 @@ class Expression {
         }
         sc.close();
         return e;
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(handleWholeDivide("2(x+3)/2"));
     }
 }

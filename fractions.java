@@ -185,19 +185,11 @@ class Fraction {
     }
 
     //tested
-    /**returns the reciprocal of a Fraction
-     * @return the reciprocal of the given Fraction
-     */
-    public Fraction reciprocal(){
-        return new Fraction(this.den, this.num);
-    }
-
-    //tested
     /** divides 2 Fractions 
      * @param another the Fraction to be divided with Fraction 1
      * @return the quotient of the 2 fractions
      */
     public Fraction divide(Fraction another){
-        return this.multiply(another.reciprocal());
+        return new Fraction((this.num * another.den), (this.den * another.num));
     }
 }

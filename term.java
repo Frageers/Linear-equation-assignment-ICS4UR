@@ -54,6 +54,15 @@ class Term {
         return new Term(newCoefficient, this.hasVariable());
     }
 
+    public Term multiply(Term t){
+        Fraction newCoefficient = this.coefficient.multiply(t.coefficient);
+        return new Term(newCoefficient, this.hasVariable());
+    }
+
+    public Term divide(Term t){
+        Fraction newCoefficient = this.coefficient.divide(t.coefficient);
+        return new Term(newCoefficient, this.hasVariable());
+    }
     /**converts from term to String */
     public String toString(){
         if(hasVariable){
@@ -68,20 +77,33 @@ class Term {
      * @return the converted term
     */
     public static Term valueOf(String token){
+        System.out.println("DEBUG: token = \"" + token + "\"");  // <--- Add this
         boolean hasVar = false;
-        char charAtEnd = token.charAt(token.length()-1);
-        if((charAtEnd >= 'a' && charAtEnd <= 'z') || (charAtEnd >= 'A' && charAtEnd <= 'Z')){
-            hasVar = true;
-            token = token.substring(0, token.length()-1);
+        String coefficientString = token;
+
+        for(int i = 0; i < token.length(); i++){
+            if(Character.isLetter(token.charAt(i))){
+                hasVar = true;
+                coefficientString = token.substring(0, i);
+                String remainder = token.substring(i+1);
+                if(remainder.startsWith("/")){
+                    if(coefficientString.equals("")){
+                        coefficientString = "1";
+                    }
+                    coefficientString += remainder;
+                }
+                break;
+            }
         }
-        if(token.equals("")|| token.equals("+")){
-            token = "1";
-        }
-        else if(token.equals("-")){ 
-            token = "-1";
+        if(coefficientString.equals("")|| coefficientString.equals("+")){
+                coefficientString = "1";
+            }
+        else if(coefficientString.equals("-")){ 
+            coefficientString = "-1";
 
         }
-        Fraction coefficient = Fraction.valueOf(token);
+        
+        Fraction coefficient = Fraction.valueOf(coefficientString);
         return new Term(coefficient, hasVar);
 
     }

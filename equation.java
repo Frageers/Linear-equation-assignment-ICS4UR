@@ -11,9 +11,13 @@ class Equation {
         String leftString = equation.substring(0, equalsIndex);
         String rightString = equation.substring(equalsIndex + 1);
 
-        leftSide = Expression.simplify(leftString);
-        rightSide = Expression.simplify(rightString);
+        leftSide = Expression.handleWholeDivide(leftString);
+        rightSide = Expression.handleWholeDivide(rightString);
         this.variable = variable;
+    }
+
+    public Expression getLeftSide(){
+        return leftSide;
     }
     /**Finds the variable used in an equation and makes sure there is only 1
      * 

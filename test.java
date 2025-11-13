@@ -201,7 +201,14 @@ public class test {
         System.out.println("Expected -3/8, got " + term1.subtract(term2));    
         System.out.println("Expected 1x, got " + term3.subtract(term4));
     }
-    
+   
+    static void testMultiplyTerms(){
+        Term t1 = new Term(new Fraction(2, 1), false);
+        Term t2 = new Term(new Fraction(3, 1), true);
+
+        System.out.println(t1.multiply(t2));
+    }
+
     static void testAllTermMethods(){
     System.out.println("Testing Term class");
         testGetCoefficient();
@@ -260,6 +267,28 @@ public class test {
         System.out.println("Expected -10x + 5, got " + Expression.simplify("5-10x")); //-10x + 5
         System.out.println("Expected -23/28x, got " + Expression.simplify("3/7x - 5/4x")); //-23/28x
     }
+
+    static void testHandleBrackets(){
+        Expression expression1 = Expression.handleBracket("2(x-3+4)");
+        System.out.println("Expected 2x + 2, got " + expression1);
+    }
+
+    static void testHandleWholeDivide(){
+        System.out.println("Testing handleWholeDivide() outputs:");
+        System.out.println("Expected x + 3, got " + Expression.handleWholeDivide("(2x+6)/2"));
+        System.out.println("Expected 2x - 4, got " + Expression.handleWholeDivide("(4x-8)/2"));
+        System.out.println("Expected 3/5x + 1/4, got " + Expression.handleWholeDivide("(3x+5/4)/5"));
+        System.out.println("Expected 2x - 1/2, got " + Expression.handleWholeDivide("(6x-3/2)/3"));
+        System.out.println("Expected -x + 3, got " + Expression.handleWholeDivide("(-2x+6)/2"));
+        System.out.println("Expected -x + 3, got " + Expression.handleWholeDivide("(2x-6)/-2"));
+        System.out.println("Expected 3, got " + Expression.handleWholeDivide("(6)/2"));
+        System.out.println("Expected -3, got " + Expression.handleWholeDivide("(-6)/2"));
+        System.out.println("Expected 2x, got " + Expression.handleWholeDivide("(4x)/2"));
+        System.out.println("Expected -2x, got " + Expression.handleWholeDivide("(-4x)/2"));
+        System.out.println("Expected 0, got " + Expression.handleWholeDivide("(0)/5"));
+        System.out.println("Expected 0, got " + Expression.handleWholeDivide("(0x+0)/3"));
+
+    }
     
     static void testAllExpressionMethods(){
         System.out.println("Testing the Expression class");
@@ -273,18 +302,32 @@ public class test {
     
     //Equations
     static void testSolve(){
-        System.out.println("Testing Equation class");
-        Equation equation1 = new Equation("2x + 34/5x - 15 = -3x + 21/2x");
-        Equation equation2 = new Equation("-7/2p + 6/5 = 9/4");
+        System.out.println("Testing Solving equations");
+        Equation equation1 = new Equation("x - 5 = 7");
+        Equation equation2 = new Equation("2x = 4");
+        Equation equation3 = new Equation("x/2 = 5");
+        Equation equation4 = new Equation("2x - 5 = -1");
+        Equation equation5 = new Equation("x/3 + 1 = 2");
+        Equation equation6 = new Equation("(x-3)/-4 = 5");
+        Equation equation7 = new Equation("2x/3 + 1 = 2");
+        Equation equation8 = new Equation("2x/3 + 1/2 = 3/4");
         
-        System.out.println("Expected x = 11 7/13, got " + equation1.solve());
-        System.out.println("Expected p = -3/10, got " + equation2.solve());
+        System.out.println("Expected x = 12, got " + equation1.solve());
+        System.out.println("Expected x = 2 " + equation2.solve());
+        System.out.println("Expected x = 10, got " + equation3.solve());
+        System.out.println("Expected x = 2, got " + equation4.solve());
+        System.out.println("Expected x = 3, got " + equation5.solve());
+        System.out.println("Expected x = -17, got " + equation6.solve());
+        System.out.println("Expected x = 3/2, got " + equation7.solve());
+        System.out.println("Expected x = 3/8, got " + equation8.solve());
+
     }
     public static void main(String[] args) {
-        testAllFractionMethods();
-        testAllTermMethods();
-        testAllExpressionMethods();
+        // testAllFractionMethods();
+        // testAllTermMethods();
+        // testAllExpressionMethods();
         testSolve();
+        // testHandleWholeDivide();
     }
 
 
