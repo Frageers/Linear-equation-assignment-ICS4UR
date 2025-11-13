@@ -9,6 +9,10 @@ class quiz {
         int den = (int) (Math.random() * (50 - -50)) + -50;
         return new Fraction(num, den);
     }
+
+
+
+
         static int randomnumber(int max, int min){
         return (int)(Math.random() * (max - min)) + min;
     }
@@ -20,6 +24,7 @@ class quiz {
         int a = randomnumber(-50, 50);
         int b = randomnumber(-50, 50);
         int c = randomnumber(-50, 50);
+        Fraction aFract = randomFraction();
         
         if(random <=0.33){
             return String.format("x + %d = %d", b, c);
@@ -28,78 +33,76 @@ class quiz {
         else if(random >0.33 && random <=0.66 ){
             return String.format("%dx = %d", a, c);
         }
-        return String.format("(%d)/x = %d", a, c);
+        return String.format("(%d)/x = %d", aFract.getNum(), c);
 
     }
 
     static String twoStep(){
         double random = Math.random() ;
-        randomFraction();
         int a = randomnumber(-50, 50);
         int b = randomnumber(-50, 50);
         int c = randomnumber(-50, 50);
+        Fraction aFract = randomFraction();
         
         if(random <=0.2){
-            return String.format("%dx + %d = %d", a, b, c);
-            
+            return String.format("%dx + %d = %d", a, b, c);   
         }
         else if(random >0.2 && random <=0.4 ){
-            return String.format("(x)/%d + %d = %d", a, b, c);
+
+            return String.format("(x)/%d + %d = %d", aFract.getDen(), b, c);
         }
         else if(random >0.4 && random <=0.6){
-            return String.format("(x - %d)/%d = %d", randomFraction(), c);
+            return String.format("(x - %d)/%d = %d", aFract.getNum(), aFract.getDen(), c);
             
         }
         else if(random >0.6 && random <=0.8 ){
             return String.format("%d(x + %d) = %d", a, b, c);
         }
-        return String.format("(%d)/x = %d", a, c);
+        return String.format("(%d)/x = %d", aFract.getNum(), c);
         
         
     }
     
     static String threeStep(){
         double random = Math.random() ;
-        randomFraction();
+        
         int a = randomnumber(-50, 50);
         int b = randomnumber(-50, 50);
         int c = randomnumber(-50, 50);
+        Fraction aFract = randomFraction();
+        Fraction cFract = randomFraction();
         
         if(random>=0.33){
-            return String.format("(%d)/x + %d = %d", a, b, c);
+            return String.format("(%d)/x + %d = %d", aFract.getNum(), b, c);
             
         }
         else if(random >0.33 && random <=0.66 ){
-            return String.format("%d(x - %d)/%d = %d", a, c);
+        
+            return String.format("%d(x - %d)/%d = %d", a, aFract.getNum(), aFract.getDen(),c);
         }
-        return String.format("(%d)/x = %d/%d", a, randomFraction());
+        return String.format("(%d)/x = %d/%d", aFract.getNum(), cFract.getNum(), cFract.getDen());
 
     }
 
     static String fourStep(){
-        randomFraction();
-
-        return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", randomFraction(), randomFraction(), randomFraction());
+        Fraction aFract = randomFraction();
+        Fraction bFract = randomFraction();
+        Fraction cFract = randomFraction();
+        return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
     }
-    
-
-
-    public static void main(String[] args) {
-        double random = Math.random() ;
-        Scanner input = new Scanner(System.in);
-        /*if(random<=0.2){
-        System.out.println("Equation : " + oneStep());
+    static String multiStep(){
+        double random = Math.random();
+        int a = randomnumber(-50, 50);
+        int b = randomnumber(-50, 50);
+        int c = randomnumber(-50, 50);
+        int d = randomnumber(-50, 50);
+        int e = randomnumber(-50, 50);
+        if(random >=0.5){
+            return String.format("%dx - %d = %dx + %d", a, b, c, d);
         }
-        else if(random>0.2 && random<=0.4){
-            System.out.println("Equation : " + twoStep());
-        }   
-        else if(random>0.4 && random<=0.6){
-            System.out.println("Equation : " + threeStep());
+        else{
+            return String.format("%dx + %d - %d = %d + %dx", a, b, c, d, e);
         }
-        else if(random>0.6 && random<=0.8){*/
-            System.out.println("Equation : " + fourStep());
-        //}
-        
 
     }
     
