@@ -91,10 +91,10 @@ class Quiz {
      * @return a random four step equation
      */
     static String fourStep(){
-        Fraction fraction1 = randomFraction();
-        Fraction fraction2 = randomFraction();
-        Fraction fraction3 = randomFraction();
-        return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", fraction1.getNum(), fraction1.getDen(), fraction2.getNum(), fraction2.getDen(), fraction3.getNum(), fraction3.getDen());
+        Fraction aFract = randomFraction();
+        Fraction bFract = randomFraction();
+        Fraction cFract = randomFraction();
+        return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
     }
     
 }
