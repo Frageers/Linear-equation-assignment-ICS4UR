@@ -68,7 +68,7 @@ class Quiz {
         }
         else if(random >0.4 && random <=0.6){
              if(aFract.isNegative()){
-                return String.format("(x + %d)/%d = %d", aFract.absoluteValue(),aFract.getDen(), c);
+                return String.format("(x + %d)/%d = %d", aFract.absoluteValue().getNum(),aFract.getDen(), c);
             }
             return String.format("(x - %d)/%d = %d", aFract.getNum(),aFract.getDen(), c);
             
@@ -90,17 +90,24 @@ class Quiz {
         int a = randomnumber(-50, 50);
         int b = randomnumber(-50, 50);
         int c = randomnumber(-50, 50);
+        Fraction aFract = randomFraction();
         Fraction cFract = randomFraction();
         
         if(random>=0.33){
             if (b<0){
-                return String.format("(%d)/x - %d = %d", a, -b, c);
+                return String.format("(%dx)/%d - %d = %d", aFract.getNum(),aFract.getDen(), -b, c);
             }
-            return String.format("(%d)/x + %d = %d", a, b, c);
+            return String.format("(%dx)/%d + %d = %d", a, b, c);
             
         }
+        
+
+
         else if(random >0.33 && random <=0.66 ){
-            return String.format("%d(x - %d)/%d = %d", a, c);
+            if(aFract.isNegative()){
+                return String.format("%d(x - %d)/%d = %d", a, aFract.absoluteValue().getNum(),aFract.getDen(), c);
+            }
+            return String.format("%d(x - %d)/%d = %d", a, aFract.getNum(),aFract.getDen(), c);
         }
         return String.format("(%d)/x = %d/%d", a, cFract.getNum(), cFract.getDen());
 
@@ -114,7 +121,7 @@ class Quiz {
         Fraction bFract = randomFraction();
         Fraction cFract = randomFraction();
         if(bFract.isNegative()){
-            return String.format("(%dx)/%d - (%d)/%d = (%d)/%d", aFract.absoluteValue(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
+            return String.format("(%dx)/%d - (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.absoluteValue().getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
         }
         return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
     }
