@@ -192,4 +192,17 @@ class Fraction {
     public Fraction divide(Fraction another){
         return new Fraction((this.num * another.den), (this.den * another.num));
     }
+
+
+    public boolean isNegative(){
+        return num * den <0;     
+    }
+    //-2/3
+    //x - 2/3
+    //x + -2/3
+    public Fraction absoluteValue(){
+        return new Fraction(Math.abs(num), Math.abs(den));
+    }
+
+
 }
