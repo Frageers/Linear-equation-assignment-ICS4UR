@@ -4,6 +4,12 @@ class Expression {
     private Term variableTerm = new Term(new Fraction(0, 1), true);
     private Term constantTerm = new Term(new Fraction(0, 1), false);
 
+    /**Creates an expression with a variable and a constant term
+     * @param variableTerm the variable term
+     * @param constantTerm the constantTerm
+     * @param example Expression(varTerm, constantTerm);
+     * @return the created expression object
+     */
     Expression(Term variableTerm, Term constantTerm){
         this.variableTerm = variableTerm;
         this.constantTerm = constantTerm;
@@ -12,6 +18,7 @@ class Expression {
 
     //tested
    /**Gets the variable term
+    * @param example expression1.getVariableTerm();
     *@return the variable term from the expression 
     */ 
     public Term getVariableTerm(){
@@ -20,12 +27,14 @@ class Expression {
 
     //tested
     /**Gets the constant term 
+     * @param example expression1.getConstantTerm();
      * @return the constant term from the expression
     */
     public Term getConstantTerm(){
         return constantTerm;
     }
-    /**Converts from expression to string */
+    /**Converts from expression to string 
+    */
     public String toString(){
         StringBuilder result = new StringBuilder();
         if(variableTerm.getCoefficient().getNum() != 0){
@@ -47,6 +56,10 @@ class Expression {
                 result.append(constantTerm.toString());
             }
         }
+        if(result.length() == 0){
+            result.append("0");
+        }
+
 
         return result.toString();
     }
@@ -57,6 +70,11 @@ class Expression {
      */
     public static Expression handleBracket(String expression) throws IllegalArgumentException{
         expression = expression.replace(" ", "");
+
+            if (expression.matches("\\(-?\\d+(/\\d+)?\\)")) {
+                expression = expression.replace("(", "").replace(")", "");
+                return simplify(expression);
+            }
 
         int open = expression.indexOf("(");
         int close = expression.indexOf(")");
@@ -86,7 +104,7 @@ class Expression {
                 rest = new Expression(); // 0
             } 
             else {
-                rest = simplify(stringRestExpression);
+                rest = handleBracket(stringRestExpression);
             }
 
         return new Expression((expanded.getVariableTerm().add(rest.getVariableTerm())), (expanded.getConstantTerm().add(rest.getConstantTerm())));
@@ -103,11 +121,29 @@ class Expression {
             return handleBracket(expression);
         }
         String insideBracket = expression.substring(0, locationWholeDivide+1);
-        String divisorStr = expression.substring(locationWholeDivide+2);
+        //System.out.println(insideBracket);
+        String afterSlash = expression.substring(locationWholeDivide+2);
+        int i = 0;
+        if(i < afterSlash.length() && (afterSlash.charAt(i) == '-' || afterSlash.charAt(i) == '+')){
+            i++;
+        }
+        while (i < afterSlash.length() && Character.isDigit(afterSlash.charAt(i))){
+            i++;
+        }
+        String divisorStr = afterSlash.substring(0, i);
+        String rest = afterSlash.substring(i);
+
+        //System.out.println(divisorStr);
         Term divisor = simplify(divisorStr).getConstantTerm();
         Expression bracketSimplified = handleBracket(insideBracket);
         Term newVarTerm = bracketSimplified.getVariableTerm().divide(divisor);
         Term newConstantTerm = bracketSimplified.getConstantTerm().divide(divisor);
+
+        if(!rest.isEmpty()){
+            Expression restExp = simplify(rest);
+            newVarTerm = newVarTerm.add(restExp.getVariableTerm());
+            newConstantTerm = newConstantTerm.add(restExp.getConstantTerm());
+        }
         return new Expression(newVarTerm, newConstantTerm);
 
     }
@@ -116,6 +152,7 @@ class Expression {
     /**Simplifies the expression
      * 
      * @param expression the expression to be simplified
+     * @param example Expression.simplify("5x + 5 - 4 + 3x");
      * @return the simplified expression
      */
     public static Expression simplify(String expression){

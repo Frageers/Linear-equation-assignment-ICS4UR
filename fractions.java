@@ -4,6 +4,11 @@ class Fraction {
     private int whole = 0;
     
     //constructors
+    /**creates a fraction object when we are given the numerator and denominator
+     * @param num numerator
+     * @param den denominator
+     * @param example Fraction(5, 6);
+     */
     Fraction(int num, int den){
 
         if(den == 0){
@@ -20,6 +25,12 @@ class Fraction {
         }
     }
 
+    /**creates a fraction object when we are given the numerator, denominator, and whole number
+     * @param num numerator
+     * @param den denominator
+     * @param whole whole number
+     * @param example Fraction(5, 6, 12);
+     */
     Fraction(int num, int den, int whole){
 
         if(den == 0){
@@ -46,6 +57,7 @@ class Fraction {
     /**retuns the gcd of 2 terms
      * @param a the first / lower number
      * @param b the second / higher number
+     * @param example gcd(6, 54);
      * @return the gcd of the 2 numbers
      */
     static int gcd(int a, int b){
@@ -61,6 +73,7 @@ class Fraction {
  
     //tested   
     /**returns the numerator 
+     * @param example Fraction.getNum();
      * @return the numerator
     */
     int getNum(){
@@ -68,7 +81,8 @@ class Fraction {
     }
     
     //tested
-    /**returns the denominator 
+    /**returns the denominator
+     * @param example Fraction.getDen(); 
      * @return the denominator
     */
     int getDen(){
@@ -77,6 +91,7 @@ class Fraction {
 
     //tested
     /**retuns the whole number 
+     * @param example fraction.getWhole();
      * @return the whole number
     */
     int getWhole(){
@@ -86,18 +101,21 @@ class Fraction {
     //setters
     /**Sets the numerator 
      * @param num the numerator to set to
+     * @param example fraction.setNum(11);
     */
     void setNum(int num){
         this.num = num;
     }
     /**Sets denominator 
      * @param den the denominator to set to
+     * @param example fraction.setDen(11);
     */
     void setDen(int den){
         this.den = den;
     }
     /**Sets whole number 
      * @param whole the whole number to set to
+     * @param example fraction.setWhole(11);
     */
     void setWhole(int whole){
         this.whole = whole;
@@ -125,6 +143,7 @@ class Fraction {
     //tested
     /**converts from String to Fraction 
      * @param term the string representation of the fraction
+     * @param example Fraction.valueOf("1 5/6");
      * @return the string converted to a fraction
      *
     */
@@ -153,6 +172,7 @@ class Fraction {
     /**adds 2 Fractions
      * 
      * @param another the Fraction to be added to the first Fraction
+     * @param example fraction1.add(fraction2)
      *@return the sum of the 2 fractions
      */
     public Fraction add(Fraction another){
@@ -164,6 +184,7 @@ class Fraction {
     //tested
     /**subtracts 2 Fractions
      * @param another the Fraction to be subtracted from the first Fraction
+     * @param example fraction1.subtract(fraction2);
      * @return the difference of the 2 fractions
      */
     public Fraction subtract(Fraction another){
@@ -176,6 +197,7 @@ class Fraction {
     //tested
     /**multiplies 2 Fractions
      * @param another the Fraction to be multiplied with the first Fraction
+     * @param example fraction1.multiply(fraction2);
      * @return the product of the 2 fractions
      */
     public Fraction multiply(Fraction another){
@@ -187,22 +209,28 @@ class Fraction {
     //tested
     /** divides 2 Fractions 
      * @param another the Fraction to be divided with Fraction 1
+     * @param example fraction1.divide(fraction2);
      * @return the quotient of the 2 fractions
      */
     public Fraction divide(Fraction another){
         return new Fraction((this.num * another.den), (this.den * another.num));
     }
 
-
+    //tested
+    /**checks if a fraction is negative
+     * @param example fraction1.isNegative();
+     * @return if the fraction is negative
+     */
     public boolean isNegative(){
         return num * den <0;     
     }
-    //-2/3
-    //x - 2/3
-    //x + -2/3
+
+    //tested
+    /**gives the absolute value of a fraction
+     * @param example fraction1.absoluteValue();
+     * @return the absolute value of a fraction
+     */
     public Fraction absoluteValue(){
         return new Fraction(Math.abs(num), Math.abs(den));
     }
-
-
 }

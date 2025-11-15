@@ -44,9 +44,14 @@ class Quiz {
      * @return a two step equation
      */
     static String twoStep(){
-        double random = Math.random() ;
+        double random = Math.random();
         randomFraction();
         int a = randomnumber(-50, 50);
+        if(a == 0){
+            while(a == 0){
+                a = randomnumber(-50, 50);
+            }
+        }
         int b = randomnumber(-50, 50);
         int c = randomnumber(-50, 50);
         Fraction aFract = randomFraction();
@@ -74,6 +79,9 @@ class Quiz {
             
         }
         else if(random >0.6 && random <=0.8 ){
+            if(b < 0){
+                 return String.format("%d(x - %d) = %d", a, -b, c);
+            }
             return String.format("%d(x + %d) = %d", a, b, c);
         }
         return String.format("(%d)/x = %d", a, c);
@@ -97,7 +105,7 @@ class Quiz {
             if (b<0){
                 return String.format("(%dx)/%d - %d = %d", aFract.getNum(),aFract.getDen(), -b, c);
             }
-            return String.format("(%dx)/%d + %d = %d", a, b, c);
+            return String.format("(%dx)/%d + %d = %d", aFract.getNum(), aFract.getDen(), b, c);
             
         }
         
@@ -121,9 +129,9 @@ class Quiz {
         Fraction bFract = randomFraction();
         Fraction cFract = randomFraction();
         if(bFract.isNegative()){
-            return String.format("(%dx)/%d - (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.absoluteValue().getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
+            return String.format("(%dx)/%d - %d/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.absoluteValue().getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
         }
-        return String.format("(%dx)/%d + (%d)/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
+        return String.format("(%dx)/%d + %d/%d = (%d)/%d", aFract.getNum(), aFract.getDen(), bFract.getNum(), bFract.getDen(), cFract.getNum(), cFract.getDen());
     }
     
 }

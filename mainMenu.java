@@ -3,31 +3,58 @@ class MainMenu {
     /**Handles the case when the user wants to use the calculator
      * @param sc the scanner object to use for input
      */
-    static void calculator(Scanner sc){
+    private static void calculator(Scanner sc){
         boolean exitCalculator = false;
+        String answer = "";
         while(!exitCalculator){
-            System.out.println("Enter the equation you want to solve");
-            String equationStr = sc.nextLine();
-            String answer = new Equation(equationStr).solve();
+            boolean validQuestion = false;
+            while(!validQuestion){
+                System.out.println("Enter the equation you want to solve");
+                String equationStr = sc.nextLine();
+                try{
+                    answer = new Equation(equationStr).solve();
+                    validQuestion = true;
+                }
+                catch(Exception e){
+                    System.out.println("Invalid Equation: " + e.getMessage());
+                    System.out.println("Please try again");
+                }
+            }
+            
             System.out.println(" " + "_".repeat(answer.length() + 2) + " ");
             System.out.println("| " + answer + " |");
             System.out.println("|" + "_".repeat(answer.length() + 2) + "|");
 
-            System.out.println("What would you like to do next?");
-            System.out.println("1. Solve another equation");
-            System.out.println("2. Return to home");
-            System.out.println("3. Exit program");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
-            if(choice == 1){
-             continue;   
-            }
-            else if(choice == 2){
-                exitCalculator = true;
-            }
-            else{
-                System.exit(0);
+            boolean validChoice = false;
+            int choice = 0;
+
+            while(!validChoice){
+                System.out.println("What would you like to do next?");
+                System.out.println("1. Solve another equation");
+                System.out.println("2. Return to home");
+                System.out.println("3. Exit program");
+
+                try{
+                    choice = sc.nextInt();
+                    sc.nextLine();
+                    if(choice == 1){
+                        validChoice = true;
+                    }
+                    else if(choice == 2){
+                        validChoice = true;
+                        exitCalculator = true;
+                    }
+                    else if(choice == 3){
+                        System.exit(0);
+                    }
+                    else{
+                        throw new IllegalArgumentException("Invalid choice. Choice has to be between 1 and 3");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -73,14 +100,30 @@ class MainMenu {
     /**Handles the case when the user wants to use the quiz 
      * @param sc the scanner object to use for input
     */
-    static void quiz(Scanner sc){
+    private static void quiz(Scanner sc){
         boolean exitQuiz = false;
         while(!exitQuiz){
-            System.out.println("How many steps do you want the equation to be");
-            System.out.println("1. One Step \n2. Two Steps \n3. Three Steps \n4. Four steps");
+            int choice = 0;
+            boolean validChoice = false;
+            while(!validChoice){
+                try{
+                    System.out.println("How many steps do you want the equation to be");
+                    System.out.println("1. One Step \n2. Two Steps \n3. Three Steps \n4. Four steps");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+                    choice = sc.nextInt();
+                    sc.nextLine();
+
+                    if(choice < 1 || choice > 4){
+                        throw new IllegalArgumentException("Choice has to be between 1 and 4");
+                    }
+                    validChoice = true;
+                }
+                catch(Exception e){
+                    System.out.println("Invalid input. " + e.getMessage());
+                }
+                
+            }
+            
 
             String equationStr = generateEquation(choice);
 
@@ -89,39 +132,62 @@ class MainMenu {
             System.out.print("Make sure that the answer is mixed fraction where neccessary \nx = ");
             String userAnswer = sc.nextLine();
             System.out.println(compareAnswers(equationStr, userAnswer));
-            System.out.println("What would you like to do now \n1.Answer another question \n2. Return to home \n3. Exit");
-            int choiceTwo = sc.nextInt();
-            sc.nextLine();
-
-            if(choiceTwo == 1){
-                continue;
-            }
-            else if(choiceTwo == 2){
-                exitQuiz = true;
-            }
-            else{
-                System.exit(0);
+            boolean validNext = false;
+            while(!validNext){
+                try{
+                    System.out.println("What would you like to do now \n1.Answer another question \n2. Return to home \n3. Exit");
+                    int choiceTwo = sc.nextInt();
+                    sc.nextLine();
+                
+                    if(choiceTwo == 1){
+                        validNext = true;
+                    }
+                    else if(choiceTwo == 2){
+                        validNext = true;
+                        exitQuiz = true;
+                    }
+                    else if(choiceTwo == 3){
+                        System.exit(0);
+                    }
+                    else{
+                        throw new IllegalArgumentException("Invalid input. Choice has to be between 1 and 3");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while(true){
-            System.out.println("What tool would you like to use?");
-            System.out.println("1. Calculator");
-            System.out.println("2. Quiz");
-            System.out.println("3. Exit program");
+            boolean validOption = false;
+            while(!validOption){
+                System.out.println("What tool would you like to use?");
+                System.out.println("1. Calculator");
+                System.out.println("2. Quiz");
+                System.out.println("3. Exit program");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
-            if(choice == 1){
-                calculator(sc);
-            }
-            else if(choice == 2){
-                quiz(sc);
-            }
-            else{
-                System.exit(0);
+                try{
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    if(choice == 1){
+                        calculator(sc);
+                    }
+                    else if(choice == 2){
+                        quiz(sc);
+                    }
+                    else if(choice == 3){
+                        System.exit(0);
+                    }
+                    else{
+                        throw new IllegalArgumentException("Invalid choice. Choice has to be between 1 and 3");
+                    }
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
